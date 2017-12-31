@@ -3,7 +3,22 @@ class VoyageController extends Controller {
 	public function home($name =''){
         $voyage=$this->model('Voyage');
         $list=[];
-        $list=$voyage->getAll();
+	    if((!empty($_GET['date']))){
+	        $periode=0;
+	    $date=$_GET['date'];
+	    if((!empty($_GET['periode']))){
+            $periode=$_GET['periode'];
+        }
+
+  $list=$voyage->filterVoyage($date,$periode);
+
+        }else{
+            $list=$voyage->getAll();
+        }
+
+
+
+
         $this->view('template/header');
 		$this->view('voyage/home',['list'=>$list]);
         $this->view('template/footer');

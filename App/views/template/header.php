@@ -118,7 +118,7 @@
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="/mvc2/public/test">Test</a>
+                                            <a href="/mvc2/public/voiture">Voitures</a>
                                         </li>
                                         <li>
                                             <a href="features-testimonials.html">Testimonials</a>

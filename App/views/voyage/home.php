@@ -9,8 +9,17 @@
         <!-- Main Column -->
         <div class="col-md-9">
             <!-- Blog Post -->
+<form method="get" action="">
+
+    <input  name="date" type="date" placeholder="Date depart">
+    <input  name="periode" type="number" placeholder="Periode">
+    <button id="singlebutton" class="btn btn-primary center-block">Confirme</button>
+</form>
             <?php
+
+
             foreach ($data['list'] as $voyage) {
+
                 $list=$voyage->getImages($voyage->getId());
 
                echo '<div class="blog-post">

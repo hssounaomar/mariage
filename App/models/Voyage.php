@@ -8,6 +8,7 @@ class Voyage {
 	private $date_depart;
     private $date_retour;
     private $nb_places;
+    private $periode;
 
 
     /**
@@ -23,7 +24,7 @@ class Voyage {
      * @param $valide
      */
 
-    public function __construct($id='', $nom='', $prix='', $note='', $description='', $date_depart='', $date_retour='', $nb_places='')
+    public function __construct($id='', $nom='', $prix='', $note='', $description='', $date_depart='', $date_retour='', $nb_places='',$periode='')
     {
 
         $this->id = $id;
@@ -34,7 +35,7 @@ class Voyage {
         $this->date_depart = $date_depart;
         $this->date_retour = $date_retour;
         $this->nb_places = $nb_places;
-
+$this->periode=$periode;
     }
 
     /**
@@ -214,4 +215,23 @@ public static function getAll() {
         $req= $db->prepare("update voyages set nb_places=nb_places-1 where id = ".$id);
         $req->execute();
     }
+    public function filterVoyage($date,$periode){
+$voy=[];
+$db = Db::getInstance();
+if($periode>0)
+$req=$db->query("SELECT * FROM voyages where date_depart ='".$date."'and periode=".$periode);
+else
+    $req=$db->query("SELECT * FROM voyages where date_depart ='".$date."'");
+
+
+while($voyage=$req->fetch()){
+
+        $voy[] = new Voyage($voyage['id'], $voyage['nom'], $voyage['prix'], $voyage['note'], $voyage['description'], $voyage['date_depart'], $voyage['date_retour'],
+            $voyage['nb_places'],$voyage['periode']
+        );
+
+}
+return $voy;
+}
+
 }
